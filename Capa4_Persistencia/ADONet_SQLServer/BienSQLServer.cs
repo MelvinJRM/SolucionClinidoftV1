@@ -81,7 +81,7 @@ namespace Capa4_Persistencia.ADONet_SQLServer
         //
         public List<Bien> BuscarPorFechaYArea(DateTime fechaminima, DateTime fechamaxima, String area)
         {
-
+            //afafafa
             Bien bien;
             List<Bien> listaDeBienes = new List<Bien>();
            
