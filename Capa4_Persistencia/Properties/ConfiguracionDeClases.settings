@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Capa4_Persistencia.Properties" GeneratedClassName="ConfiguracionDeClases">
+  <Profiles />
+  <Settings>
+    <Setting Name="ParametroClaseFabricaDePersistencia" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Capa4_Persistencia.FabricaPersistencia.FabricaConcretaSQLServer</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
