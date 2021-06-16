@@ -8,7 +8,7 @@ namespace Capa3_Dominio.Entidades
 {
    public class Inventario
     {
-        private int cantidadBien;
+        //private int cantidadBien;
         private DateTime fecha;
 
         private Usuario usuario;
@@ -19,7 +19,7 @@ namespace Capa3_Dominio.Entidades
             detalleDeInventarios = new List<DetalleDeInventario>();
         }
 
-        public int CantidadBien { get => cantidadBien; set => cantidadBien = value; }
+        //public int CantidadBien { get => cantidadBien; set => cantidadBien = value; }
         public DateTime Fecha { get => fecha; set => fecha = value; }
         internal Usuario Usuario { get => usuario; set => usuario = value; }
         internal List<DetalleDeInventario> DetalleDeInventarios { get => detalleDeInventarios; }

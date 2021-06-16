@@ -37,7 +37,6 @@ namespace Capa1_Presentacion.WinForms
             this.dtpFechaFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaInicial = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvReportePerdida = new System.Windows.Forms.DataGridView();
             this.btnCalcularPerdida = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtPromedioPerdida = new System.Windows.Forms.TextBox();
@@ -45,8 +44,16 @@ namespace Capa1_Presentacion.WinForms
             this.txtCantidadBienes = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtMontoTotal = new System.Windows.Forms.TextBox();
+            this.dgvBienesPerdidos = new System.Windows.Forms.DataGridView();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gpbFiltroReporte.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReportePerdida)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBienesPerdidos)).BeginInit();
             this.SuspendLayout();
             // 
             // gpbFiltroReporte
@@ -72,6 +79,7 @@ namespace Capa1_Presentacion.WinForms
             this.btnBuscar.TabIndex = 4;
             this.btnBuscar.Text = "BUSCAR";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // cboArea
             // 
@@ -123,14 +131,6 @@ namespace Capa1_Presentacion.WinForms
             this.label1.TabIndex = 0;
             this.label1.Text = "FECHA INICIAL";
             // 
-            // dgvReportePerdida
-            // 
-            this.dgvReportePerdida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReportePerdida.Location = new System.Drawing.Point(31, 188);
-            this.dgvReportePerdida.Name = "dgvReportePerdida";
-            this.dgvReportePerdida.Size = new System.Drawing.Size(740, 193);
-            this.dgvReportePerdida.TabIndex = 1;
-            // 
             // btnCalcularPerdida
             // 
             this.btnCalcularPerdida.Location = new System.Drawing.Point(35, 400);
@@ -139,6 +139,7 @@ namespace Capa1_Presentacion.WinForms
             this.btnCalcularPerdida.TabIndex = 2;
             this.btnCalcularPerdida.Text = "CALCULAR PERDIDAS";
             this.btnCalcularPerdida.UseVisualStyleBackColor = true;
+            this.btnCalcularPerdida.Click += new System.EventHandler(this.btnCalcularPerdida_Click);
             // 
             // label4
             // 
@@ -191,11 +192,63 @@ namespace Capa1_Presentacion.WinForms
             this.txtMontoTotal.Size = new System.Drawing.Size(100, 20);
             this.txtMontoTotal.TabIndex = 4;
             // 
+            // dgvBienesPerdidos
+            // 
+            this.dgvBienesPerdidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBienesPerdidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.Column11,
+            this.Column12,
+            this.Column13,
+            this.Column14});
+            this.dgvBienesPerdidos.Location = new System.Drawing.Point(31, 176);
+            this.dgvBienesPerdidos.Name = "dgvBienesPerdidos";
+            this.dgvBienesPerdidos.Size = new System.Drawing.Size(740, 205);
+            this.dgvBienesPerdidos.TabIndex = 11;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Codigo";
+            this.Column8.Name = "Column8";
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Categoria";
+            this.Column9.Name = "Column9";
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Modelo";
+            this.Column10.Name = "Column10";
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "Marca";
+            this.Column11.Name = "Column11";
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "Serie";
+            this.Column12.Name = "Column12";
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "Estado";
+            this.Column13.Name = "Column13";
+            // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "Precio";
+            this.Column14.Name = "Column14";
+            // 
             // FormReporteDePerdidas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(877, 478);
+            this.ClientSize = new System.Drawing.Size(800, 490);
+            this.Controls.Add(this.dgvBienesPerdidos);
             this.Controls.Add(this.txtCantidadBienes);
             this.Controls.Add(this.txtMontoTotal);
             this.Controls.Add(this.txtPromedioPerdida);
@@ -203,13 +256,12 @@ namespace Capa1_Presentacion.WinForms
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCalcularPerdida);
-            this.Controls.Add(this.dgvReportePerdida);
             this.Controls.Add(this.gpbFiltroReporte);
             this.Name = "FormReporteDePerdidas";
             this.Text = "FormReporteDePerdidas";
             this.gpbFiltroReporte.ResumeLayout(false);
             this.gpbFiltroReporte.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReportePerdida)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBienesPerdidos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,7 +276,6 @@ namespace Capa1_Presentacion.WinForms
         private System.Windows.Forms.DateTimePicker dtpFechaFinal;
         private System.Windows.Forms.DateTimePicker dtpFechaInicial;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvReportePerdida;
         private System.Windows.Forms.Button btnCalcularPerdida;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtPromedioPerdida;
@@ -233,5 +284,13 @@ namespace Capa1_Presentacion.WinForms
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtMontoTotal;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.DataGridView dgvBienesPerdidos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
     }
 }

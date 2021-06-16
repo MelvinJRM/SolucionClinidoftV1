@@ -39,28 +39,6 @@ namespace Capa4_Persistencia.ADONet_SQLServer
             }
             return listaDeAreas;
         }
-        //public Area BuscarAreaPorID(int idA)
-        //{
-        //    Area area;
-        //    string consultaSQL = "select idArea,nombre  from Area where idArea = '" + idA + "'";
-        //    try
-        //    {
-        //        SqlDataReader resultadoSQL = gestorSQL.EjecutarConsulta(consultaSQL);
-        //        if (resultadoSQL.Read())
-        //        {
-        //            area = ObtenerArea(resultadoSQL);
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("No existe el AREA.");
-        //        }
-        //    }
-        //    catch (Exception err)
-        //    {
-        //        throw err;
-        //    }
-        //    return area;
-        //}
         private Area ObtenerArea(SqlDataReader resultadoSQL)
         {
             Area ar = new Area();

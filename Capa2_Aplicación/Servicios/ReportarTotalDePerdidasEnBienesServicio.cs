@@ -5,24 +5,41 @@ using System.Text;
 using System.Threading.Tasks;
 using Capa3_Dominio.Entidades;
 using Capa3_Dominio.Servicios;
+using Capa3_Dominio.Contratos;
 using Capa4_Persistencia.ADONet_SQLServer;
-
+using Capa4_Persistencia.FabricaPersistencia;
 
 namespace Capa2_Aplicación.Servicios
 {
     public class ReportarTotalDePerdidasEnBienesServicio
     {
 
-        // private MovimientoDeBien movimiento
-      //  private GestorSQLServer gestorAccesoDatos;
-       // private BienSQLServer bienDAO;
-       // private UsuarioSQLServer usuarioDAO;
-       // private MovimientoSQLServer movimientoDAO;
-
-
+        private IGestorAccesoDeDatos gestorAccesoDatos;
+        private IBienPersistencia bienDAO;
+        private IAreaPersistencia areaDAO;
+        //  private GestorSQLServer gestorAccesoDatos;
+        // private BienSQLServer bienDAO;
+        // private UsuarioSQLServer usuarioDAO;
+        // private MovimientoSQLServer movimientoDAO;
+        public ReportarTotalDePerdidasEnBienesServicio()
+        {
+            gestorAccesoDatos = FabricaAbstractaDePersistencia.CrearInstancia().CrearGestorAccesoDeDatos();
+            bienDAO = FabricaAbstractaDePersistencia.CrearInstancia().CrearBienPersistencia(gestorAccesoDatos);
+            areaDAO= FabricaAbstractaDePersistencia.CrearInstancia().CrearAreaPersistencia(gestorAccesoDatos);
+        }
+        public List<Area> ListarAreas()
+        {
+            gestorAccesoDatos.AbrirConexion();
+            List<Area> are =areaDAO.ListarArea();
+            gestorAccesoDatos.CerrarConexion();
+            return are;
+        }
         public List<Bien> BuscarBienes(DateTime fechaminima, DateTime fechamaxima, String area)
         {
-            List<Bien> bienes = new List<Bien>();
+            gestorAccesoDatos.AbrirConexion();
+            List<Bien> bienes = bienDAO.BuscarPorFechaYArea(fechaminima,fechamaxima,area);
+            gestorAccesoDatos.CerrarConexion();
+            
             return bienes;
 
         }
@@ -47,13 +64,7 @@ namespace Capa2_Aplicación.Servicios
         }
 
 
-        public List<Area> ListarAreas()
-        {
-            List<Area> areas= new List<Area>();
-            
-
-            return areas;
-        }
+      
 
 
 

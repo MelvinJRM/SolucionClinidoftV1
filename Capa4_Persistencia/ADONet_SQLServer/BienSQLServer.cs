@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Capa3_Dominio.Entidades;
 using Capa3_Dominio.Contratos;
+using System.Windows.Forms;
+
 namespace Capa4_Persistencia.ADONet_SQLServer
 {
    public class BienSQLServer :IBienPersistencia
@@ -54,8 +56,53 @@ namespace Capa4_Persistencia.ADONet_SQLServer
             return bien;
         }
 
+        public List<Bien> BuscarPorFechaYArea(DateTime fechaminima, DateTime fechamaxima, String area)
+        {
 
-        //
+            Bien bien;
+            List<Bien> listaDeBienes = new List<Bien>();
+            String min = fechaminima.ToString("yyyy-MM-dd");
+            MessageBox.Show(min);
+
+            String max = fechamaxima.ToString("yyyy-MM-dd");
+            MessageBox.Show(max);
+            String consultaSQL = "select b.idBien,b.categoria,b.marca,b.modelo,b.serie,b.encontrado, b.precio, b.depreciacion, b.fecha from bien b " +
+                                 "inner join DetalleInventario di on b.idBien=di.idBien " +
+                                 "inner join Inventario i on i.idInventario=di.idInventario " +
+                                 "inner join Usuario u on u.idUsuario=b.idUsuario " +
+                                 "inner join Area a on u.idArea=a.idArea " +
+                                 "where b.encontrado=0 and di.bienEncontrado=0 and(i.fecha between '"+ min +"'"+ " and '"+ max +"' )"+ " and a.nombre= '" + area + "'";
+            
+
+            try
+            {
+                SqlDataReader resultadoSQL = gestorSQL.EjecutarConsulta(consultaSQL);
+
+                while (resultadoSQL.Read())
+                {
+
+                    bien = ObtenerBien(resultadoSQL);
+                    listaDeBienes.Add(bien);
+                }
+
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+
+            return listaDeBienes;
+        }
+
+
+
+
+
+
+
+
+
+
         public Bien BuscarBienPorId(String idBien)
         {
             Bien bien;
@@ -79,37 +126,9 @@ namespace Capa4_Persistencia.ADONet_SQLServer
             return bien;
         }
         //
-        public List<Bien> BuscarPorFechaYArea(DateTime fechaminima, DateTime fechamaxima, String area)
-        {
-            //afafafa
-            Bien bien;
-            List<Bien> listaDeBienes = new List<Bien>();
-           
-             String consultaSQL = "select  b.idBien,b.categoria,b.marca,b.modelo,b.serie,b.encontrado, b.precio, b.depreciacion, b.fecha" +
-                                  "from bien b inner join DetalleInventario di on b.idBien=di.idBien" +
-                                  "inner join Inventario i on i.idInventario=di.idInventario " +
-                                  "inner join Usuario u on u.idUsuario=b.idUsuario " +
-                                  "inner join Area a on u.idArea=a.idArea" +
-                                  "where b.encontrado=0 and (i.fecha between '" + fechaminima +"' and '"+ fechamaxima + "') and and a.nombre='"+area+"'";
-            try
-            {
-                SqlDataReader resultadoSQL = gestorSQL.EjecutarConsulta(consultaSQL);
+     
 
-                while (resultadoSQL.Read())
-                {
 
-                    bien = ObtenerBien(resultadoSQL);
-                    listaDeBienes.Add(bien);
-                }
-
-            }
-            catch (Exception er)
-            {
-                throw er;
-            }
-   
-            return listaDeBienes;        
-        }
 
     }
 }
